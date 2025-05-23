@@ -13,7 +13,7 @@ const columns = [
 const TaskList = ({ filter = "all" }) => {
   const { tasks, toggleTask, deleteTask, moveTask } = useTasks();
 
-  // Filter tasks based on the filter prop
+  // Filter
   let filteredTasks = tasks;
   if (filter === "completed") {
     filteredTasks = tasks.filter((t) => t.completed);
@@ -21,7 +21,7 @@ const TaskList = ({ filter = "all" }) => {
     filteredTasks = tasks.filter((t) => !t.completed && t.status === filter);
   }
 
-  // Group filtered tasks by status for columns
+  // Group filtered
   const tasksByStatus = {
     todo: filteredTasks.filter((t) => t.status === "todo"),
     progress: filteredTasks.filter((t) => t.status === "progress"),

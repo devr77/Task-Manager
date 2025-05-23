@@ -42,7 +42,7 @@ export const TaskProvider = ({ children }) => {
 
   const moveTask = useCallback(
     (id, newStatus) => {
-      console.log("Moving task", id, "to", newStatus); // Add this line
+      console.log("Moving task", id, "to", newStatus);
       setTasks((prev) =>
         prev.map((task) =>
           task.id === id ? { ...task, status: newStatus } : task

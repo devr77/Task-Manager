@@ -7,7 +7,7 @@ export const useLocalStorage = (key, initialValue) => {
       return item ? JSON.parse(item) : initialValue;
     } catch (error) {
       console.error("Failed to parse localStorage", error);
-      localStorage.removeItem(key); // clear corrupted value
+      localStorage.removeItem(key);
       return initialValue;
     }
   });
