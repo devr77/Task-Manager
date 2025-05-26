@@ -2,7 +2,7 @@ import React, { useState } from "react";
 
 import TaskForm from "./Components/TaskForm";
 import TaskList from "./Components/TaskList";
-import { TaskProvider } from "./context/TaskContext";
+import { TaskProvider, useTasks } from "./context/TaskContext";
 import ThemeToggle from "./Components/ThemeToggle";
 
 class ErrorBoundary extends React.Component {
@@ -57,6 +57,12 @@ function App() {
                 className="px-3 py-1 bg-yellow-500 text-white rounded hover:bg-yellow-600"
               >
                 Completed
+              </button>
+              <button
+                onClick={() => setFilter("high")}
+                className="px-3 py-1 bg-yellow-500 text-white rounded hover:bg-yellow-600"
+              >
+                High
               </button>
             </div>
 

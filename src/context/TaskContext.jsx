@@ -7,10 +7,16 @@ export const TaskProvider = ({ children }) => {
   const [tasks, setTasks] = useLocalStorage("tasks", []);
 
   const addTask = useCallback(
-    (text) => {
+    (text, state) => {
       setTasks((prev) => [
         ...prev,
-        { id: Date.now(), text, completed: false, status: "todo" },
+        {
+          id: Date.now(),
+          text,
+          completed: false,
+          status: "todo",
+          priority: state,
+        },
       ]);
     },
     [setTasks]
@@ -40,6 +46,21 @@ export const TaskProvider = ({ children }) => {
     [setTasks]
   );
 
+  const Completed = useCallback(() => {
+    // setTasks((prev) => [
+    //   ...prev,
+    //   {
+    //     completed: false,
+    //   },
+    // ]);
+    setTasks((prev) =>
+      prev.map((task) => ({
+        ...task,
+        completed: true,
+      }))
+    );
+  }, [setTasks]);
+
   const moveTask = useCallback(
     (id, newStatus) => {
       console.log("Moving task", id, "to", newStatus);
@@ -53,8 +74,8 @@ export const TaskProvider = ({ children }) => {
   );
 
   const value = useMemo(
-    () => ({ tasks, addTask, deleteTask, toggleTask, moveTask }),
-    [tasks, addTask, deleteTask, toggleTask, moveTask]
+    () => ({ tasks, addTask, deleteTask, toggleTask, moveTask, Completed }),
+    [tasks, addTask, deleteTask, toggleTask, moveTask, Completed]
   );
 
   return <TaskContext.Provider value={value}>{children}</TaskContext.Provider>;
